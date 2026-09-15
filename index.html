@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HENRIQUE TAVEIRA — Portfolio &amp; Ateliê Autoral</title>
+  <meta name="description" content="Criação e desenvolvimento de moda contemporânea, intervenções em artes visuais têxteis e direção criativa de campanhas e projetos institucionais de impacto.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --ink: #0D0D0D;
+      --muted: #555555;
+      --light-muted: #999999;
+      --border: rgba(0, 0, 0, 0.12);
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --font: 'Jost', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* CUSTOM CURSOR (DESKTOP) */
+    @media (pointer: fine) {
+      .custom-cursor {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      }
+      .custom-cursor.active {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      color: #FFFFFF;
+      mix-blend-difference: difference;
+      pointer-events: none;
+    }
+
+    .header-logo, .header-menu-btn {
+      pointer-events: auto;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #FFFFFF;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-logo:hover, .header-menu-btn:hover {
+      opacity: 0.7;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      position: relative;
+      height: 100svh;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: -5%;
+      left: 0;
+      width: 100%;
+      height: 110%;
+      object-fit: cover;
+      opacity: 0.9;
+      transform: scale(1.02);
+      transition: transform 1.2s ease;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #FFFFFF 0%, rgba(255,255,255,0.4) 40%, rgba(0,0,0,0.2) 100%);
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 2.5rem 3rem;
+      z-index: 10;
+    }
+
+    .hero-kicker {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(13, 13, 13, 0.75);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(48px, 12.5vw, 190px);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      color: var(--ink);
+    }
+
+    .hero-title-line {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    /* MANIFESTO SECTION */
+    .manifesto-section {
+      padding: 9rem 2.5rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .manifesto-text {
+      max-width: 950px;
+      font-size: clamp(24px, 2.6vw, 42px);
+      font-weight: 300;
+      line-height: 1.38;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    /* FULL-WIDTH BANNER */
+    .feature-banner {
+      position: relative;
+      height: clamp(380px, 75vh, 850px);
+      width: 100%;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .feature-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* PANORAMA / WORKS SECTION */
+    .panorama-section {
+      padding: 9rem 2.5rem 10rem;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .panorama-kicker {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3.5rem;
+      display: block;
+    }
+
+    .panorama-layout {
+      display: flex;
+      gap: 3.5rem;
+      position: relative;
+    }
+
+    /* DESKTOP STICKY FILTER BAR */
+    .desktop-filter-bar {
+      width: 200px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      position: sticky;
+      top: 7rem;
+      height: fit-content;
+    }
+
+    .filter-btn {
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+      cursor: pointer;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+      padding: 4px 0;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      color: var(--ink);
+    }
+
+    .filter-btn .cat-num {
+      font-size: 9px;
+      margin-right: 6px;
+      opacity: 0.5;
+    }
+
+    /* MOBILE FLOATING PILL FILTER */
+    .mobile-filter-bar {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      z-index: 60;
+    }
+
+    .mobile-filter-scroll {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      scrollbar-width: none;
+    }
+    .mobile-filter-scroll::-webkit-scrollbar { display: none; }
+
+    .mobile-filter-scroll .filter-btn {
+      font-size: 10px;
+    }
+
+    /* WORKS GRID (EDITORIAL ASYMMETRIC) */
+    .works-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: 2.5rem;
+      row-gap: 7rem;
+    }
+
+    .work-card {
+      text-decoration: none;
+      color: var(--ink);
+      display: block;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
+
+    .work-card.feature {
+      grid-column: span 7;
+    }
+
+    .work-card.small {
+      grid-column: span 5;
+    }
+
+    .work-card.stagger {
+      margin-top: 8rem;
+    }
+
+    .work-card.dimmed {
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .card-media-wrap {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: #F7F7F7;
+      box-shadow: 0 30px 60px -35px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-media-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .work-card:hover .card-media-img {
+      transform: scale(1.03);
+    }
+
+    .card-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 1rem;
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .card-year {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    .card-category {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+    }
+
+    /* WORK DETAIL PAGE / VIEW */
+    .view-container {
+      display: none;
+      animation: fadeInView 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .view-container.active {
+      display: block;
+    }
+
+    @keyframes fadeInView {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .work-detail-page {
+      padding: 8rem 2.5rem 6rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .back-nav {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-block;
+      transition: color 0.2s ease;
+    }
+
+    .back-nav:hover {
+      color: var(--ink);
+    }
+
+    .detail-cat-kicker {
+      margin-top: 3rem;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+    }
+
+    .detail-main-title {
+      margin-top: 1rem;
+      font-size: clamp(38px, 6.5vw, 92px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 0.95;
+    }
+
+    .btn-ficha-tecnica {
+      margin-top: 2.5rem;
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      padding-bottom: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .btn-ficha-tecnica:hover {
+      border-color: #000;
+    }
+
+    .detail-gallery {
+      margin-top: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6rem;
+    }
+
+    .gallery-item-full {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: #F7F7F7;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item-portrait {
+      width: 65%;
+      aspect-ratio: 4/5;
+      background: #F7F7F7;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item-full img, .gallery-item-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* FICHA TÉCNICA DRAWER */
+    .ficha-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 440px;
+      max-width: 100vw;
+      height: 100vh;
+      background: #FFFFFF;
+      border-left: 1px solid var(--border);
+      z-index: 96;
+      padding: 3rem 2.5rem;
+      overflow-y: auto;
+      transition: right 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ficha-drawer.open {
+      right: 0;
+    }
+
+    .ficha-close {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .ficha-title {
+      margin-top: 3.5rem;
+      font-size: 1.35rem;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    .ficha-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .ficha-item dt {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .ficha-item dd {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #222;
+    }
+
+    /* ABOUT / SOBRE PAGE */
+    .about-page {
+      padding: 8rem 2.5rem 6rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .about-kicker {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .about-heading {
+      margin-top: 1.5rem;
+      font-size: clamp(38px, 5.5vw, 84px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 0.95;
+    }
+
+    .about-grid {
+      margin-top: 5rem;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .about-portrait-wrap {
+      position: sticky;
+      top: 7rem;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: #F7F7F7;
+      box-shadow: 0 30px 60px -35px rgba(0, 0, 0, 0.25);
+    }
+
+    .about-portrait-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-paragraphs {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      font-size: 17px;
+      line-height: 1.75;
+      color: #262626;
+      max-width: 680px;
+    }
+
+    .about-facts-grid {
+      margin-top: 7rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3.5rem;
+    }
+
+    .fact-col {
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
+      padding-top: 1.5rem;
+    }
+
+    .fact-col-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .fact-col-label {
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    .fact-col-detail {
+      margin-top: 0.75rem;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* FULLSCREEN MENU OVERLAY */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: #FFFFFF;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .menu-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .menu-close-btn {
+      position: absolute;
+      top: 2rem;
+      right: 2.5rem;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-nav {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .menu-link {
+      font-size: clamp(42px, 7vw, 96px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      line-height: 1;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-link:hover {
+      color: #999;
+    }
+
+    .menu-location-footer {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* CONTACT OVERLAY */
+    .contact-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: #FFFFFF;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .contact-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .contact-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 6rem;
+      gap: 2.5rem;
+      max-width: 1200px;
+    }
+
+    .contact-kicker {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-link-group {
+      text-decoration: none;
+      color: var(--ink);
+      display: block;
+    }
+
+    .contact-big-label {
+      font-size: clamp(38px, 6vw, 76px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+
+    .contact-link-group:hover .contact-big-label {
+      color: #999;
+    }
+
+    .contact-sub-val {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* SITE FOOTER */
+    footer {
+      padding: 7rem 2.5rem 2.5rem;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .footer-kicker {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .footer-action-btn {
+      background: none;
+      border: none;
+      text-align: left;
+      width: 100%;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .footer-huge-cta {
+      display: block;
+      font-size: clamp(48px, 8vw, 110px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 0.95;
+      color: var(--ink);
+      transition: color 0.5s ease;
+    }
+
+    .footer-action-btn:hover .footer-huge-cta {
+      color: #999;
+    }
+
+    .footer-bottom-row {
+      margin-top: 4.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-bottom-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--ink);
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 1024px) {
+      header {
+        padding: 1.25rem 1.5rem;
+      }
+      .manifesto-section {
+        padding: 5rem 1.5rem;
+      }
+      .panorama-section, .about-page, .work-detail-page, footer {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .works-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      .work-card.feature, .work-card.small {
+        grid-column: span 1;
+      }
+      .work-card.stagger {
+        margin-top: 0;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-facts-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .contact-content {
+        padding: 0 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-filter-bar {
+        display: none;
+      }
+      .mobile-filter-bar {
+        display: block;
+      }
+      .panorama-layout {
+        display: block;
+      }
+      .works-grid {
+        grid-template-columns: 1fr;
+        row-gap: 3.5rem;
+      }
+      .gallery-item-portrait {
+        width: 100%;
+      }
+      .gallery-item-full {
+        aspect-ratio: 4/3;
+      }
+      .footer-bottom-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .ficha-drawer {
+        width: 100vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="custom-cursor" id="cursor">Ver</div>
+
+  <!-- FIXED HEADER -->
+  <header>
+    <a onclick="navigateTo('home')" class="header-logo">Henrique Taveira</a>
+    <button onclick="openMenu()" class="header-menu-btn">Menu</button>
+  </header>
+
+  <!-- MAIN SPA ROUTER CONTAINER -->
+  <main id="app">
+    
+    <!-- HOME VIEW -->
+    <div id="view-home" class="view-container active">
+      <!-- HERO -->
+      <section class="hero-section">
+        <img src="https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/377fb704d_IMG-20260828-WA0003.jpeg" alt="Henrique Taveira Ateliê" class="hero-bg" id="heroBgImg">
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+          <span class="hero-kicker">Direção Criativa · Moda · Arte Visual</span>
+          <h1 class="hero-title">
+            <span class="hero-title-line"><span>H</span><span>E</span><span>N</span><span>R</span><span>I</span><span>Q</span><span>U</span><span>E</span></span>
+            <span class="hero-title-line"><span>T</span><span>A</span><span>V</span><span>E</span><span>I</span><span>R</span><span>A</span></span>
+          </h1>
+        </div>
+      </section>
+
+      <!-- MANIFESTO -->
+      <section class="manifesto-section">
+        <p class="manifesto-text">
+          Criação e desenvolvimento de moda contemporânea, intervenções em artes visuais têxteis e direção criativa de campanhas e projetos institucionais de impacto.
+        </p>
+      </section>
+
+      <!-- FEATURE BANNER -->
+      <section class="feature-banner">
+        <img src="https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/ba9851ce4_IMG_1144_converted.jpg" alt="Corpo e Estrutura" loading="lazy">
+      </section>
+
+      <!-- PANORAMA WORKS -->
+      <section class="panorama-section" id="trabalhos">
+        <span class="panorama-kicker">Panorama — obras, coleções e processo</span>
+        
+        <div class="panorama-layout">
+          <!-- Desktop Sticky Filter -->
+          <nav class="desktop-filter-bar">
+            <button class="filter-btn active" onclick="filterCategory('todos', this)"><span class="cat-num">00</span>Panorama</button>
+            <button class="filter-btn" onclick="filterCategory('moda', this)"><span class="cat-num">01</span>Moda &amp; Alfaiataria</button>
+            <button class="filter-btn" onclick="filterCategory('arte', this)"><span class="cat-num">02</span>Artes Visuais &amp; Têxtil</button>
+            <button class="filter-btn" onclick="filterCategory('projetos', this)"><span class="cat-num">03</span>Projetos Especiais</button>
+            <button class="filter-btn" onclick="filterCategory('processo', this)"><span class="cat-num">04</span>Processo</button>
+          </nav>
+
+          <!-- Mobile Floating Filter -->
+          <div class="mobile-filter-bar">
+            <div class="mobile-filter-scroll">
+              <button class="filter-btn active" onclick="filterCategory('todos', this)">Panorama</button>
+              <button class="filter-btn" onclick="filterCategory('moda', this)">Moda</button>
+              <button class="filter-btn" onclick="filterCategory('arte', this)">Artes Visuais</button>
+              <button class="filter-btn" onclick="filterCategory('projetos', this)">Projetos</button>
+              <button class="filter-btn" onclick="filterCategory('processo', this)">Processo</button>
+            </div>
+          </div>
+
+          <!-- Cards Grid -->
+          <div class="works-grid" id="worksGrid"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- WORK DETAIL VIEW -->
+    <div id="view-detail" class="view-container">
+      <div class="work-detail-page">
+        <a onclick="navigateTo('home')" class="back-nav">← Panorama</a>
+        <span class="detail-cat-kicker" id="detailCatKicker"></span>
+        <h1 class="detail-main-title" id="detailTitle"></h1>
+        <button onclick="toggleFicha(true)" class="btn-ficha-tecnica">Ficha Técnica</button>
+
+        <div class="detail-gallery" id="detailGallery"></div>
+      </div>
+    </div>
+
+    <!-- ABOUT VIEW -->
+    <div id="view-about" class="view-container">
+      <div class="about-page">
+        <span class="about-kicker">05 / Perfil &amp; Trajetória</span>
+        <h1 class="about-heading">Sobre Henrique Taveira</h1>
+
+        <div class="about-grid">
+          <div class="about-portrait-wrap">
+            <img src="https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/377fb704d_IMG-20260828-WA0003.jpeg" alt="Henrique Taveira Ateliê" loading="lazy">
+          </div>
+          <div class="about-paragraphs">
+            <p>
+              Estilista, diretor criativo, artista visual e arquiteto. Uma visão integradora que transita com naturalidade entre o rigor técnico da modelagem, a sensibilidade artística da intervenção manual e a estratégia comercial de grandes marcas de moda.
+            </p>
+            <p>
+              Minha formação é híbrida por vocação: graduado em Design de Moda pelo Istituto Europeo di Design (IED) e em Arquitetura &amp; Urbanismo pela PUC. Essa dupla bagagem moldou uma forma de pensar onde o corpo é espaço, o tecido é material construtivo e o vestuário é arquitetura em movimento.
+            </p>
+            <p>
+              Com mais de 6 anos de atuação sólida na Animale, liderei o desenvolvimento de produtos na linha de alfaiataria premium, participando de projetos emblemáticos como o Terno Oficial da Seleção Brasileira Feminina de Futebol na Copa do Mundo 2023.
+            </p>
+            <p>
+              No ateliê e nas artes visuais, investigo a relação entre palavra, tempo e matéria por meio de bordados botânicos minuciosos, intervenções têxteis em sarja e denim, jacquards caligráficos e pesquisas curatoriais contemporâneas.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-facts-grid">
+          <div class="fact-col">
+            <p class="fact-col-num">01</p>
+            <p class="fact-col-label">Design de Moda — IED</p>
+            <p class="fact-col-detail">Istituto Europeo di Design</p>
+          </div>
+          <div class="fact-col">
+            <p class="fact-col-num">02</p>
+            <p class="fact-col-label">Arquitetura &amp; Urbanismo — PUC</p>
+            <p class="fact-col-detail">O corpo é espaço; o vestuário, arquitetura em movimento</p>
+          </div>
+          <div class="fact-col">
+            <p class="fact-col-num">03</p>
+            <p class="fact-col-label">6+ anos — Animale</p>
+            <p class="fact-col-detail">Liderança em alfaiataria premium e projetos emblemáticos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FICHA TÉCNICA DRAWER -->
+  <aside class="ficha-drawer" id="fichaDrawer">
+    <button onclick="toggleFicha(false)" class="ficha-close">Fechar</button>
+    <h2 class="ficha-title">Ficha Técnica</h2>
+    <dl class="ficha-list">
+      <div class="ficha-item">
+        <dt>Ano</dt>
+        <dd id="fichaYear"></dd>
+      </div>
+      <div class="ficha-item">
+        <dt>Categoria</dt>
+        <dd id="fichaCat"></dd>
+      </div>
+      <div class="ficha-item">
+        <dt>Materiais</dt>
+        <dd id="fichaMaterials"></dd>
+      </div>
+      <div class="ficha-item">
+        <dt>Breve Conceitual</dt>
+        <dd id="fichaDesc"></dd>
+      </div>
+    </dl>
+  </aside>
+
+  <!-- FULLSCREEN MENU OVERLAY -->
+  <div class="menu-overlay" id="menuOverlay">
+    <button onclick="closeMenu()" class="menu-close-btn">Fechar</button>
+    <nav class="menu-nav">
+      <a class="menu-link" onclick="navigateTo('home'); closeMenu();">Trabalhos</a>
+      <a class="menu-link" onclick="navigateTo('about'); closeMenu();">Sobre</a>
+      <button class="menu-link" onclick="closeMenu(); openContact();">Contato</button>
+    </nav>
+    <div class="menu-location-footer">Rio de Janeiro / São Paulo</div>
+  </div>
+
+  <!-- FULLSCREEN CONTACT OVERLAY -->
+  <div class="contact-overlay" id="contactOverlay">
+    <button onclick="closeContact()" class="menu-close-btn">Fechar</button>
+    <div class="contact-content">
+      <span class="contact-kicker">Propostas, parcerias e encomendas</span>
+      <a href="https://wa.me/5511950704952" target="_blank" class="contact-link-group">
+        <span class="contact-big-label">WhatsApp</span>
+        <span class="contact-sub-val">(11) 95070-4952</span>
+      </a>
+      <a href="mailto:henrique950704952@gmail.com" class="contact-link-group">
+        <span class="contact-big-label">E-mail</span>
+        <span class="contact-sub-val">henrique950704952@gmail.com</span>
+      </a>
+      <span class="contact-kicker" style="margin-top:1rem;">Rio de Janeiro / São Paulo — atendimento remoto para todo o Brasil e exterior</span>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer>
+    <span class="footer-kicker">06 / Contato &amp; Parcerias</span>
+    <button onclick="openContact()" class="footer-action-btn">
+      <span class="footer-huge-cta">Iniciar Diálogo</span>
+    </button>
+    <div class="footer-bottom-row">
+      <span>&copy; 2026 Henrique Taveira</span>
+      <div class="footer-bottom-links">
+        <a href="https://wa.me/5511950704952" target="_blank">WhatsApp</a>
+        <a href="mailto:henrique950704952@gmail.com">E-mail</a>
+      </div>
+      <span>Rio de Janeiro / São Paulo</span>
+    </div>
+  </footer>
+
+  <!-- DATA & LOGIC SCRIPT -->
+  <script>
+    const WORKS = [{"slug": "orbitante", "title": "orbiTANTE", "category": "arte", "categoryLabel": "Artes Visuais & Têxtil", "year": "2026", "materials": "Intervenção têxtil, bordado matiz e seda sobre suporte plano", "scale": "feature", "description": "Série autoral que orbita a relação entre palavra, tempo e matéria. O gesto repetido do bordado constrói trajetórias circulares — tudo o que parte, retorna transformado. A obra é ao mesmo tempo mapa, manuscrito e superfície.", "cover": "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/f6d062747_ChatGPTImage12desetde202623_57_48.png", "localCover": "fotos/ChatGPT Image 12 de set. de 2026, 23_57_48.png", "images": ["https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/f6d062747_ChatGPTImage12desetde202623_57_48.png", "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/30038453a_ChatGPTImage14desetde202621_35_58.png"], "localImages": ["fotos/ChatGPT Image 12 de set. de 2026, 23_57_48.png", "fotos/ChatGPT Image 14 de set. de 2026, 21_35_58.png"]}, {"slug": "foto-hibrida", "title": "Foto Híbrida", "category": "arte", "categoryLabel": "Artes Visuais & Têxtil", "year": "2026", "materials": "Fotografia com intervenção manual sobre suporte", "scale": "small", "description": "Investigação sobre a hibridez da imagem: o registro fotográfico é tratado como suporte para o gesto pictórico. A técnica dissolve-se na mão — nasce uma terceira natureza, nem foto, nem pintura.", "cover": "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/824317cb4_ChatGPTImage14desetde202621_37_46.png", "localCover": "fotos/ChatGPT Image 14 de set. de 2026, 21_37_46.png", "images": ["https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/824317cb4_ChatGPTImage14desetde202621_37_46.png", "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/c6ee3708a_ChatGPTImage14desetde202621_41_59.png"], "localImages": ["fotos/ChatGPT Image 14 de set. de 2026, 21_37_46.png", "fotos/ChatGPT Image 14 de set. de 2026, 21_41_59.png"]}, {"slug": "o-guerreiro", "title": "O guerreiro", "category": "arte", "categoryLabel": "Artes Visuais & Têxtil", "year": "2026", "materials": "Pintura gestual e carvão sobre tela, apresentada sobre madeira clara", "scale": "feature", "description": "Pintura gestual sobre tela. A figura do guerreiro emerge entre traços de carvão e matéria densa — um estudo sobre resistência, vulnerabilidade e postura. Apresentada sobre madeira clara, a obra assume a escala de objeto.", "cover": "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/96e98295e_ChatGPTImage14desetde202621_44_12.png", "localCover": "fotos/ChatGPT Image 14 de set. de 2026, 21_44_12.png", "images": ["https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/96e98295e_ChatGPTImage14desetde202621_44_12.png", "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/523bf2fcf_mockup-canvas-madeira-clara.jpg", "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/1b3e959d4_mockup-canvas-madeira-clara2.jpg"], "localImages": ["fotos/ChatGPT Image 14 de set. de 2026, 21_44_12.png", "fotos/mockup-canvas-madeira-clara.jpg", "fotos/mockup-canvas-madeira-clara (1).jpg"]}, {"slug": "cotidiano", "title": "Cotidiano", "category": "arte", "categoryLabel": "Artes Visuais & Têxtil — Naturezas-Mortas", "year": "2026", "materials": "Tinta sobre tela", "scale": "small", "description": "Natureza-morta contemporânea da série Cotidiano. Objetos banais elevados à condição de ícone por meio da luz norte e da composição austera — o cotidiano tratado como pequena liturgia.", "cover": "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/bd4964d49_COTIDIANO-004.png", "localCover": "fotos/COTIDIANO-004.png", "images": ["https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/bd4964d49_COTIDIANO-004.png"], "localImages": ["fotos/COTIDIANO-004.png"]}, {"slug": "corpo-e-estrutura", "title": "Corpo & Estrutura", "category": "moda", "categoryLabel": "Moda & Alfaiataria", "year": "2024", "materials": "Alfaiataria, modelagem autoral e fibras nobres", "scale": "feature", "description": "A precisão do corte, a escolha rigorosa de tecidos nobres e o equilíbrio entre a forma estruturada e o corpo em movimento. Desenvolvimento de linhas comerciais de moda e alfaiataria contemporânea.", "cover": "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/ba9851ce4_IMG_1144_converted.jpg", "localCover": "fotos/IMG_1144_converted.jpg", "images": ["https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/ba9851ce4_IMG_1144_converted.jpg"], "localImages": ["fotos/IMG_1144_converted.jpg"]}, {"slug": "terno-oficial-cbf", "title": "Terno Oficial — Seleção Brasileira Feminina", "category": "projetos", "categoryLabel": "Projetos Especiais & Cases", "year": "2023", "materials": "Alfaiataria sob medida, bordados e direção criativa", "scale": "feature", "description": "Case histórico: CBF x Animale, Copa do Mundo 2023. Primeira vez na história que a delegação feminina viajou vestindo alta alfaiataria sob medida — engenharia de produto, fittings e direção criativa de bordados.", "cover": "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/d0089d793_20260914_214633.jpg", "localCover": "fotos/20260914_214633.jpg", "images": ["https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/d0089d793_20260914_214633.jpg"], "localImages": ["fotos/20260914_214633.jpg"]}, {"slug": "atelier-mao-e-materia", "title": "Ateliê: a mão e a matéria", "category": "processo", "categoryLabel": "Processo, Lab & Pesquisa", "year": "2026", "materials": "Processo — croquis, moulage, testes de matéria", "scale": "small", "description": "O método de ateliê: pesquisa de campo, investigação semântica, croquis manuais, moulage tridimensional e fichas de produto. A mesa de trabalho como território de todas as obras.", "cover": "https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/377fb704d_IMG-20260828-WA0003.jpeg", "localCover": "fotos/IMG-20260828-WA0003.jpeg", "images": ["https://media.base44.com/images/public/user_6aa8acc4151a16540fc7de4f/377fb704d_IMG-20260828-WA0003.jpeg"], "localImages": ["fotos/IMG-20260828-WA0003.jpeg"]}];
+    let activeCat = 'todos';
+    let currentWork = null;
+
+    function renderWorksGrid() {
+      const grid = document.getElementById('worksGrid');
+      grid.innerHTML = '';
+
+      WORKS.forEach((w, idx) => {
+        const isStagger = idx % 2 === 1;
+        const card = document.createElement('div');
+        card.className = `work-card ${w.scale} ${isStagger ? 'stagger' : ''}`;
+        card.setAttribute('data-category', w.category);
+        card.onclick = () => openWorkDetail(w.slug);
+
+        card.innerHTML = `
+          <div class="card-media-wrap">
+            <img src="${w.cover}" alt="${w.title}" class="card-media-img" loading="lazy" onerror="this.src='${w.localCover}'">
+          </div>
+          <div class="card-meta-row">
+            <span class="card-title">${w.title}</span>
+            <span class="card-year">${w.year}</span>
+          </div>
+          <span class="card-category">${w.categoryLabel}</span>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCategory(catId, btnEl) {
+      activeCat = catId;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) {
+        btnEl.classList.add('active');
+      }
+
+      // Sync active state on all matching buttons (desktop & mobile)
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(`'${catId}'`)) {
+          b.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('.work-card').forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (catId === 'todos' || cardCat === catId) {
+          card.classList.remove('dimmed');
+        } else {
+          card.classList.add('dimmed');
+        }
+      });
+    }
+
+    function openWorkDetail(slug) {
+      const work = WORKS.find(w => w.slug === slug);
+      if (!work) return;
+      currentWork = work;
+
+      document.getElementById('detailCatKicker').textContent = work.categoryLabel;
+      document.getElementById('detailTitle').textContent = work.title;
+
+      // Ficha Técnica
+      document.getElementById('fichaYear').textContent = work.year;
+      document.getElementById('fichaCat').textContent = work.categoryLabel;
+      document.getElementById('fichaMaterials').textContent = work.materials;
+      document.getElementById('fichaDesc').textContent = work.description;
+
+      // Images
+      const gal = document.getElementById('detailGallery');
+      gal.innerHTML = '';
+      work.images.forEach((imgSrc, i) => {
+        const div = document.createElement('div');
+        div.className = i % 2 === 0 ? 'gallery-item-full' : 'gallery-item-portrait';
+        div.innerHTML = `<img src="${imgSrc}" alt="${work.title}" loading="lazy" onerror="this.src='${work.localImages[i] || work.localCover}'">`;
+        gal.appendChild(div);
+      });
+
+      navigateTo('detail');
+      window.history.pushState(null, '', '#trabalho/' + slug);
+    }
+
+    function toggleFicha(open) {
+      const drawer = document.getElementById('fichaDrawer');
+      if (open) drawer.classList.add('open');
+      else drawer.classList.remove('open');
+    }
+
+    function navigateTo(viewId) {
+      document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+      toggleFicha(false);
+
+      if (viewId === 'home') {
+        document.getElementById('view-home').classList.add('active');
+        window.history.pushState(null, '', '#');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (viewId === 'about') {
+        document.getElementById('view-about').classList.add('active');
+        window.history.pushState(null, '', '#sobre');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (viewId === 'detail') {
+        document.getElementById('view-detail').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function openMenu() {
+      document.getElementById('menuOverlay').classList.add('open');
+    }
+    function closeMenu() {
+      document.getElementById('menuOverlay').classList.remove('open');
+    }
+
+    function openContact() {
+      document.getElementById('contactOverlay').classList.add('open');
+    }
+    function closeContact() {
+      document.getElementById('contactOverlay').classList.remove('open');
+    }
+
+    // Custom Cursor tracking
+    const cursor = document.getElementById('cursor');
+    if (cursor) {
+      window.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest('.work-card')) {
+          cursor.classList.add('active');
+        } else {
+          cursor.classList.remove('active');
+        }
+      });
+    }
+
+    // Parallax on Hero
+    window.addEventListener('scroll', () => {
+      const heroBg = document.getElementById('heroBgImg');
+      if (heroBg) {
+        const scroll = window.scrollY;
+        if (scroll < window.innerHeight) {
+          heroBg.style.transform = `translateY(${scroll * 0.18}px) scale(1.02)`;
+        }
+      }
+    });
+
+    // Router on popstate & hash init
+    window.addEventListener('popstate', handleRoute);
+    function handleRoute() {
+      const hash = window.location.hash;
+      if (hash.startsWith('#trabalho/')) {
+        const slug = hash.replace('#trabalho/', '');
+        openWorkDetail(slug);
+      } else if (hash === '#sobre') {
+        navigateTo('about');
+      } else {
+        navigateTo('home');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderWorksGrid();
+      handleRoute();
+    });
+  </script>
+</body>
+</html>

@@ -12,7 +12,7 @@ import StaticNotFound from '@/components/StaticNotFound';
  */
 export default function StaticApp() {
   return (
-    <Router>
+    <Router basename="/HENRIQUETAVEIRA">
       <ScrollToTop />
       <Cursor />
       <Routes>
